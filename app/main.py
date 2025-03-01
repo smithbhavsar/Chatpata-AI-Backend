@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from app.routes import customers, restaurants, menu_items
 from fastapi.middleware.cors import CORSMiddleware
+from app.routes import customers, restaurants, menu_items
 
-app = FastAPI()
+app = FastAPI(title="Chatpata AI Backend")
 
 # Allow frontend (React app) to access the backend
 origins = [
@@ -17,8 +17,6 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods (GET, POST, PUT, DELETE)
     allow_headers=["*"],  # Allow all headers
 )
-
-app = FastAPI(title="Chatpata AI Backend")
 
 # Include API routes
 app.include_router(customers.router, prefix="/customers", tags=["Customers"])
