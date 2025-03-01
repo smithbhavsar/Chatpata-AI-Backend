@@ -13,6 +13,15 @@ def add_menu_item(menu_item: dict):
 
     return {"message": "Menu item added successfully", "data": response.data}
 
+@router.get("/")
+def get_all_menu_items():
+    response = supabase.table("menu_items").select("*").execute()
+
+    if response.data is None:
+        raise HTTPException(status_code=400, detail="Error fetching menu items from Supabase")
+
+    return response.data
+
 # ✅ Get all menu items for a restaurant
 @router.get("/{restaurant_id}")
 def get_menu_items(restaurant_id: str):
