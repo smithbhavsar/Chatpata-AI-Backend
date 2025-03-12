@@ -4,7 +4,7 @@ from app.supabase_client import supabase
 router = APIRouter()
 
 # ✅ Create a new menu item
-@router.post("/{restaurant_id}")
+@router.post("/")
 def add_menu_item(menu_item: dict):
     response = supabase.table("menu_items").insert(menu_item).execute()
     if response.data is None:
